@@ -12,6 +12,7 @@
   "author": "Noroff",
   "license": "ISC",
   "devDependencies": {
+    "cypress": "^13.13.2",
     "enlist": "^0.1.0",
     "husky": "^9.1.4",
     "jest": "^29.7.0",
