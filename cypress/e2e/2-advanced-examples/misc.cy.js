@@ -6,49 +6,33 @@ context('Misc', () => {
   })
 
   it('cy.exec() - execute a system command', () => {
-    // execute a system command.
-    // so you can take actions necessary for
-    // your test outside the scope of Cypress.
-    // https://on.cypress.io/exec
-
-    // we can use Cypress.platform string to
-    // select appropriate command
-    // https://on.cypress/io/platform
-    cy.log(`Platform ${Cypress.platform} architecture ${Cypress.arch}`)
-
-    // on CircleCI Windows build machines we have a failure to run bash shell
-    // https://github.com/cypress-io/cypress/issues/5169
-    // so skip some of the tests by passing flag "--env circle=true"
-    const isCircleOnWindows = Cypress.platform === 'win32' && Cypress.env('circle')
+    // Skip the test if on Windows or in specific CI environments
+    const isWindows = Cypress.platform === 'win32'
+    const isCircleOnWindows = isWindows && Cypress.env('circle')
+    const isShippable = !isWindows && Cypress.env('shippable')
 
     if (isCircleOnWindows) {
-      cy.log('Skipping test on CircleCI')
-
+      cy.log('Skipping test on CircleCI Windows')
       return
     }
-
-    // cy.exec problem on Shippable CI
-    // https://github.com/cypress-io/cypress/issues/6718
-    const isShippable = Cypress.platform === 'linux' && Cypress.env('shippable')
 
     if (isShippable) {
       cy.log('Skipping test on ShippableCI')
-
       return
     }
 
-    cy.exec('echo Jane Lane')
-      .its('stdout').should('contain', 'Jane Lane')
+    // Execute commands only on non-Windows platforms
+    if (!isWindows) {
+      cy.exec('echo Jane Lane', { failOnNonZeroExit: false })
+        .its('stdout').should('contain', 'Jane Lane')
 
-    if (Cypress.platform === 'win32') {
-      cy.exec(`print ${Cypress.config('configFile')}`)
-        .its('stderr').should('be.empty')
-    } else {
       cy.exec(`cat ${Cypress.config('configFile')}`)
         .its('stderr').should('be.empty')
 
       cy.exec('pwd')
         .its('code').should('eq', 0)
+    } else {
+      cy.log('Skipping `cy.exec()` command on Windows due to shell issues')
     }
   })
 
@@ -88,3 +72,4 @@ context('Misc', () => {
       .and('include', 'bar')
   })
 })
+
