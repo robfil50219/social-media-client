@@ -21,7 +21,9 @@
     "lint-staged": "^15.2.8",
     "live-server": "^1.2.0",
     "prettier": "3.3.3",
-    "sass": "^1.54.8"
+    "sass": "^1.54.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "bootstrap-dark-5": "^1.1.3"
