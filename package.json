@@ -8,7 +8,7 @@
     "start": "sass --watch src/scss:dist/css & live-server",
     "prepare": "npx husky install",
     "lint": "eslint .",
-    "test": "vitest"
+    "test": "vitest --run"
   },
   "keywords": [],
   "author": "Noroff",
