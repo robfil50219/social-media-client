@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "test:unit": "jest",
     "test": "npm run test:unit",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "test:e2e:ci": "cypress run --headless"
   },
   "keywords": [],
   "author": "Noroff",
