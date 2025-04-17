@@ -15,7 +15,7 @@ This repository contains the Course Assignment (CA) for the Noroff FEU Workflow 
 1. **Clone your fork** and install dependencies:
 
    ```bash
-   git clone https://github.com/<your-username>/social-media-client.git
+   git clone https://github.com/robfil50219/social-media-client.git
    cd social-media-client
    npm install
    ```
