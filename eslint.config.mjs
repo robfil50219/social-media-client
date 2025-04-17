@@ -4,22 +4,27 @@ import pluginJs from '@eslint/js';
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
   {
-    // Define global variables for browser, Node, and Jest environments
+    // apply to all files
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
-        // Jest globals for unit tests
+        // Jest globals
         jest: true,
         describe: true,
-        test: true,
         it: true,
+        test: true,
         expect: true,
+        // Mocha/Cypress hooks
+        before: true,
         beforeEach: true,
-        afterEach: true
+        after: true,
+        afterEach: true,
+        // Cypress globals
+        cy: true,
+        Cypress: true
       }
     }
   },
-  // Use recommended rules from the @eslint/js plugin
   pluginJs.configs.recommended
 ];
